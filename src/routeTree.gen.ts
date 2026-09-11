@@ -10,33 +10,80 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CreateRouteImport } from './routes/create'
+import { Route as MostMournedRouteImport } from './routes/most-mourned'
+import { Route as RecentlyDepartedRouteImport } from './routes/recently-departed'
+import { Route as MemorialIdRouteImport } from './routes/memorial.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CreateRoute = CreateRouteImport.update({
+  id: '/create',
+  path: '/create',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MostMournedRoute = MostMournedRouteImport.update({
+  id: '/most-mourned',
+  path: '/most-mourned',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RecentlyDepartedRoute = RecentlyDepartedRouteImport.update({
+  id: '/recently-departed',
+  path: '/recently-departed',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MemorialIdRoute = MemorialIdRouteImport.update({
+  id: '/memorial/$id',
+  path: '/memorial/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/create': typeof CreateRoute
+  '/most-mourned': typeof MostMournedRoute
+  '/recently-departed': typeof RecentlyDepartedRoute
+  '/memorial/$id': typeof MemorialIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/create': typeof CreateRoute
+  '/most-mourned': typeof MostMournedRoute
+  '/recently-departed': typeof RecentlyDepartedRoute
+  '/memorial/$id': typeof MemorialIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/create': typeof CreateRoute
+  '/most-mourned': typeof MostMournedRoute
+  '/recently-departed': typeof RecentlyDepartedRoute
+  '/memorial/$id': typeof MemorialIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/create' | '/most-mourned' | '/recently-departed' | '/memorial/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/create' | '/most-mourned' | '/recently-departed' | '/memorial/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/create'
+    | '/most-mourned'
+    | '/recently-departed'
+    | '/memorial/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CreateRoute: typeof CreateRoute
+  MostMournedRoute: typeof MostMournedRoute
+  RecentlyDepartedRoute: typeof RecentlyDepartedRoute
+  MemorialIdRoute: typeof MemorialIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +95,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/create': {
+      id: '/create'
+      path: '/create'
+      fullPath: '/create'
+      preLoaderRoute: typeof CreateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/most-mourned': {
+      id: '/most-mourned'
+      path: '/most-mourned'
+      fullPath: '/most-mourned'
+      preLoaderRoute: typeof MostMournedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/recently-departed': {
+      id: '/recently-departed'
+      path: '/recently-departed'
+      fullPath: '/recently-departed'
+      preLoaderRoute: typeof RecentlyDepartedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/memorial/$id': {
+      id: '/memorial/$id'
+      path: '/memorial/$id'
+      fullPath: '/memorial/$id'
+      preLoaderRoute: typeof MemorialIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CreateRoute: CreateRoute,
+  MostMournedRoute: MostMournedRoute,
+  RecentlyDepartedRoute: RecentlyDepartedRoute,
+  MemorialIdRoute: MemorialIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
