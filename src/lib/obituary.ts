@@ -51,4 +51,5 @@ export function generateObituary(input: {
   const parts = [OPENERS[h % OPENERS.length]!(name)];
   if (cause) parts.push(MIDDLES[(h >> 3) % MIDDLES.length]!(cause));
   parts.push(CLOSERS[(h >> 6) % CLOSERS.length]!);
+  return parts.join(" ");
 }
