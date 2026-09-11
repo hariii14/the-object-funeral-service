@@ -81,8 +81,8 @@ export function statisticsFor(m: Memorial) {
     { label: "Known owners", value: String((h % 3) + 1) },
     { label: "Major incidents", value: String((h >> 3) % 40) },
     { label: "Successful repairs", value: h % 7 === 0 ? "1" : "0" },
-    { label: "Last known location", value: LOCATIONS[h % LOCATIONS.length] },
-    { label: "Historical importance", value: IMPORTANCE[(h >> 5) % IMPORTANCE.length] },
+    { label: "Last known location", value: LOCATIONS[h % LOCATIONS.length]! },
+    { label: "Historical importance", value: IMPORTANCE[(h >> 5) % IMPORTANCE.length]! },
   ];
 }
 

@@ -48,8 +48,7 @@ export function generateObituary(input: {
   const cause = input.cause.trim();
   const h = hash(name + cause + (input.story ?? ""));
 
-  const parts = [OPENERS[h % OPENERS.length](name)];
-  if (cause) parts.push(MIDDLES[(h >> 3) % MIDDLES.length](cause));
-  parts.push(CLOSERS[(h >> 6) % CLOSERS.length]);
-  return parts.join(" ");
+  const parts = [OPENERS[h % OPENERS.length]!(name)];
+  if (cause) parts.push(MIDDLES[(h >> 3) % MIDDLES.length]!(cause));
+  parts.push(CLOSERS[(h >> 6) % CLOSERS.length]!);
 }

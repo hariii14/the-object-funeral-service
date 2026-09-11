@@ -25,8 +25,12 @@ function read(): Memorial[] {
     if (!raw) return (cache = seedMemorials());
     const parsed = JSON.parse(raw) as Memorial[];
     // Re-attach bundled seed photographs (their URLs change between builds).
-    cache = parsed.map((m) => (m.seed && SEED_IMAGES[m.id] ? { ...m, image: SEED_IMAGES[m.id] } : m));
-    return cache;
+    const next = parsed.map((m) => {
+      const seedImage = SEED_IMAGES[m.id];
+      return m.seed && seedImage ? { ...m, image: seedImage } : m;
+    });
+    cache = next;
+    return next;
   } catch {
     return (cache = seedMemorials());
   }
